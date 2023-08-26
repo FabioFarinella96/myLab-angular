@@ -1,0 +1,19 @@
+.row {
+  width: 300px;
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20vh auto;
+}
+
+.row .login-text {
+  font-size: 20px;
+}
+
+.col-12 .btn {
+  width: 100%;
+}
+
+.error {
+  color: red;
+}

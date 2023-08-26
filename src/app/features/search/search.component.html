@@ -1,0 +1,52 @@
+<h2 class="container-title">
+  Samples <span *ngIf="auth?.email">{{ auth.userType() }}</span>
+</h2>
+
+<!-- admin form  -->
+<form
+  *ngIf="auth?.email === 'admin@labanalysis.it'"
+  class="admin-form"
+  #adminForm="ngForm"
+  (ngSubmit)="admin.addSample(adminForm)"
+>
+  <input
+    class="name"
+    matInput
+    type="text"
+    name="name"
+    placeholder="Enter name"
+    ngModel
+    required
+  />
+  <input
+    class="desc"
+    matInput
+    type="text"
+    name="description"
+    placeholder="Enter description"
+    ngModel
+    required
+  />
+
+  <button class="btn" type="submit" [disabled]="!adminForm.valid">Add</button>
+</form>
+
+<div *ngIf="!auth.isSearchText">
+  <div class="container" *ngFor="let sample of admin.samples">
+    <!-- tests viewer function  -->
+    <p class="name" (click)="auth.viewTests()">{{ sample?.name }}</p>
+    <p>{{ sample?.description }}</p>
+    <!-- id dei tests non corrispondono ai samples  -->
+    <!-- <div>
+      <p *ngIf="auth.isTests">{{ auth.tests?.name }}</p>
+    </div> -->
+
+    <button
+      class="removeBtn"
+      *ngIf="auth?.email === 'admin@labanalysis.it'"
+      (click)="admin.removeSample(sample.id)"
+    >
+      X
+    </button>
+  </div>
+</div>

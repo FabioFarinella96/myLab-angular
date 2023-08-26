@@ -1,0 +1,44 @@
+<!-- login form  -->
+<form
+  #loginForm="ngForm"
+  (submit)="auth.login(loginForm)"
+  class="row g-3 needs-validation"
+>
+  <p class="login-text">Login</p>
+  <div class="input-group has-validation">
+    <span class="input-group-text" id="inputGroupPrepend">@</span>
+    <input
+      type="email"
+      placeholder="Enter your Email"
+      class="form-control"
+      aria-describedby="inputGroupPrepend"
+      required
+      [ngModel]
+      name="email"
+    />
+    <div class="invalid-feedback">Please choose a username.</div>
+  </div>
+  <div class="input-group has-validation">
+    <input
+      type="password"
+      placeholder="Enter your password"
+      class="form-control"
+      aria-describedby="inputGroupPrepend"
+      required
+      [ngModel]
+      name="password"
+    />
+  </div>
+  <p class="error" *ngIf="auth.isLoginError">
+    Invalid email or password. Please try again
+  </p>
+  <div class="col-12">
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="loginForm.invalid"
+    >
+      Sign in
+    </button>
+  </div>
+</form>

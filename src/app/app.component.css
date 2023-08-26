@@ -1,0 +1,17 @@
+.navbar {
+  margin-bottom: 40px;
+  z-index: 1;
+}
+
+.container-fluid {
+  padding: 20px;
+}
+
+.nav-item .active {
+  color: rgb(25, 135, 84);
+  font-weight: 700;
+}
+
+.nav-item .nav-link {
+  cursor: pointer;
+}
