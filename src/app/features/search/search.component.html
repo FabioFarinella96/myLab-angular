@@ -31,15 +31,17 @@
   <button class="btn" type="submit" [disabled]="!adminForm.valid">Add</button>
 </form>
 
-<div *ngIf="!auth.isSearchText">
-  <div class="container" *ngFor="let sample of admin.samples">
+<div *ngIf="!auth.isSearchText; else searchText">
+  <div class="container" *ngFor="let sample of admin.samples" #content>
     <!-- tests viewer function  -->
-    <p class="name" (click)="auth.viewTests()">{{ sample?.name }}</p>
+    <p class="name">{{ sample?.name }}</p>
     <p>{{ sample?.description }}</p>
-    <!-- id dei tests non corrispondono ai samples  -->
-    <!-- <div>
-      <p *ngIf="auth.isTests">{{ auth.tests?.name }}</p>
-    </div> -->
+    <button (click)="auth.viewTests(sample?.id)">View Tests</button>
+    <div *ngIf="auth.isTests">
+      <ul *ngFor="let test of auth.tests?.items">
+        <li>{{ test.name }}</li>
+      </ul>
+    </div>
 
     <button
       class="removeBtn"
@@ -50,3 +52,7 @@
     </button>
   </div>
 </div>
+<ng-template #searchText>
+  <p>{{ auth.searchText?.name }}</p>
+  <p>{{ auth.searchText?.description }}</p>
+</ng-template>

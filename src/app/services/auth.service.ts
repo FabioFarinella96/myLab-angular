@@ -32,7 +32,7 @@ export class AuthService {
   token: any;
   isLoginError: boolean = false;
 
-  searchText: any = '';
+  searchText: any;
   isSearchText: boolean = false;
 
   tests: any;
@@ -106,8 +106,7 @@ export class AuthService {
       });
   }
 
-  // tests viewer - chiamata get ai tests, ma non corrispondono ai samples poichè hanno id diverso
-  viewTests() {
+  viewTests(sampleId: string) {
     const tokenString = localStorage.getItem('userToken');
     this.token = JSON.parse(tokenString!);
 
@@ -118,10 +117,14 @@ export class AuthService {
     );
 
     this.http
-      .get('https://frontendtest-backend.azurewebsites.net/api/Tests', {
-        headers,
-      })
-      .subscribe((res: any) => (this.tests = res.items[0]));
+      .get(
+        `https://frontendtest-backend.azurewebsites.net/api/Tests?sampleId=${sampleId}`,
+        {
+          headers,
+        }
+      )
+      .subscribe((res: any) => (this.tests = res));
+
     this.isTests = true;
   }
 }
